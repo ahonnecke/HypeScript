@@ -17,21 +17,23 @@ License along with this library; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 """
 
-import unicodedata
-from time import time
-import urllib2
-import urllib
-from bs4 import BeautifulSoup
 import json
-import string
 import os
+import string
+import unicodedata
+import urllib
+import urllib2
+from time import time
+
+from bs4 import BeautifulSoup
 
 # AREA_TO_SCRAPE
 # This is the general area that you'd like to parse and scrape.
 # Ex. 'popular', 'latest', '<username>' or 'track/<id>'
 
-AREA_TO_SCRAPE = 'popular'
-NUMBER_OF_PAGES = 3
+AREA_TO_SCRAPE = 'ahonnecke'
+NUMBER_OF_PAGES = 60
+DESTINATION = '/volume1/music/'
 
 # DO NOT MODIFY THESE UNLES YOU KNOW WHAT YOU ARE DOING
 DEBUG = False
@@ -65,7 +67,7 @@ class HypeScraper:
             html, cookie = self.get_html_file(page_url)
 
             if DEBUG:
-                html_file = open('hypeHTML.html', 'w')
+                html_file = open('/tmp/hypeHTML.html', 'w')
                 html_file.write(html)
                 html_file.close()
 
@@ -141,7 +143,7 @@ class HypeScraper:
                 if os.path.exists(filename):
                     print('File already exists , skipping')
                 else:
-                    mp3_song_file = open(filename, 'wb')
+                    mp3_song_file = open(DESTINATION + '/' + filename, 'wb')
                     mp3_song_file.write(download_response.read())
                     mp3_song_file.close()
             except urllib2.HTTPError, e:
@@ -158,5 +160,6 @@ def main():
     scraper = HypeScraper()
     scraper.start()
 
+
 if __name__ == '__main__':
-        main()
+    main()
