@@ -32,7 +32,7 @@ from bs4 import BeautifulSoup
 # Ex. 'popular', 'latest', '<username>' or 'track/<id>'
 
 AREA_TO_SCRAPE = 'ahonnecke'
-NUMBER_OF_PAGES = 60
+NUMBER_OF_PAGES = 1
 DESTINATION = '/volume1/music/'
 
 # DO NOT MODIFY THESE UNLES YOU KNOW WHAT YOU ARE DOING
