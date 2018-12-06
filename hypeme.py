@@ -136,7 +136,7 @@ class HypeScraper:
                 song_data_json = response.read()
                 response.close()
                 song_data = json.loads(song_data_json)
-                url = song_data[u'url']
+                url = song_data[u'url']  # throws "generic exception: u'url'" sometimes...
 
                 download_response = urllib2.urlopen(url)
                 filename = '{} - {}.mp3'.format(artist, title)
