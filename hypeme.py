@@ -33,7 +33,7 @@ from bs4 import BeautifulSoup
 
 AREA_TO_SCRAPE = 'ahonnecke'
 NUMBER_OF_PAGES = 1
-DESTINATION = '/volume1/music/'
+DESTINATION = '/volume1/music/HymenMachine/'
 
 # DO NOT MODIFY THESE UNLES YOU KNOW WHAT YOU ARE DOING
 DEBUG = False
