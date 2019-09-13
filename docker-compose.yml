@@ -1,0 +1,10 @@
+---
+version: '3'
+services:
+  hype_machine_scraper:
+    stdin_open: true
+    tty: true
+    build: .
+    volumes:
+      - ".:/app"
+
