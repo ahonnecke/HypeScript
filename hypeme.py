@@ -1,3 +1,5 @@
+#!/usr/bin/env python2
+
 """
 This python script automates downloading files from HypeMachine.com
 Copyright (C) 2011  Farid Marwan Zakaria
@@ -33,7 +35,7 @@ from bs4 import BeautifulSoup
 
 AREA_TO_SCRAPE = 'ahonnecke'
 NUMBER_OF_PAGES = 1
-DESTINATION = '/volume1/music/HymenMachine/'
+DESTINATION = '/dest'
 
 # DO NOT MODIFY THESE UNLES YOU KNOW WHAT YOU ARE DOING
 DEBUG = False

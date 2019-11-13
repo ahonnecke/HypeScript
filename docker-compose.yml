@@ -1,10 +1,21 @@
 ---
 version: '3'
 services:
-  hype_machine_scraper:
+  hype_machine_scraper_3:
     stdin_open: true
     tty: true
     build: .
     volumes:
       - ".:/app"
+
+
+  hype_machine_scraper_2:
+    stdin_open: true
+    tty: true
+    build:
+      context: .
+      dockerfile: "./Dockerfile.py2.7"
+    volumes:
+      - ".:/app"
+      - "/mnt/largesse/hypemachine:/dest"
 
