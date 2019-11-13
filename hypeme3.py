@@ -1,4 +1,5 @@
-#!/usr/local/bin/python3
+#!/usr/bin/env python3
+
 """
 This python script automates downloading files from HypeMachine.com
 Copyright (C) 2011  Farid Marwan Zakaria
@@ -22,9 +23,11 @@ import json
 import os
 import string
 import unicodedata
-import urllib
+import requests
+from urllib.request import urlopen
 from bs4 import BeautifulSoup
 from time import time
+from urllib.parse import urlencode
 
 # AREA_TO_SCRAPE
 # This is the general area that you'd like to parse and scrape.
@@ -76,14 +79,16 @@ class HypeScraper:
 
     def get_html_file(self, url):
         data = {"ax": 1, "ts": time()}
-        data_encoded = urllib.urlencode(data)
+        data_encoded = urlencode(data)
         complete_url = url + "?{}".format(data_encoded)
-        request = urllib2.Request(complete_url)
-        response = urllib2.urlopen(request)
+        # request = urllib2.Request(complete_url)
+        # response = urllib2.urlopen(request)
+        # response = urlopen(complete_url).read()
+        response = requests.get(complete_url)
         # save our cookie
         cookie = response.headers.get("Set-Cookie")
         # grab the HTML
-        html = response.read()
+        html = response.content
         response.close()
         return html, cookie
 
