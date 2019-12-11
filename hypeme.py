@@ -129,6 +129,13 @@ class HypeScraper:
                 continue
 
             try:
+                filename = '{} - {}.mp3'.format(artist, title)
+                if os.path.exists(DESTINATION + '/' + filename):
+                    print('File already exists, skipping')
+                    continue
+                else:
+                    print('File does not exist, fetching')
+
                 serve_url = 'http://hypem.com/serve/source/{}/{}'.format(id,
                                                                          key)
                 request = urllib2.Request(serve_url, '', {'Content-Type':
@@ -141,7 +148,6 @@ class HypeScraper:
                 url = song_data[u'url']  # throws "generic exception: u'url'" sometimes...
 
                 download_response = urllib2.urlopen(url)
-                filename = '{} - {}.mp3'.format(artist, title)
                 if os.path.exists(filename):
                     print('File already exists , skipping')
                 else:
