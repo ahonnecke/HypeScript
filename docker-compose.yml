@@ -17,5 +17,5 @@ services:
       dockerfile: "./Dockerfile.py2.7"
     volumes:
       - ".:/app"
-      - "/mnt/largesse/hypemachine:/dest"
+      - "/media/ahonnecke/data/Music/HymenMachine:/dest"
 

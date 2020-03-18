@@ -26,8 +26,16 @@ import unicodedata
 import urllib
 import urllib2
 from time import time
+import logging
 
 from bs4 import BeautifulSoup
+
+logging.basicConfig(
+    format="%(levelname)-10s:  %(threadName)-20s: %(funcName)-20s:  %(message)s"
+)
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+
 
 # AREA_TO_SCRAPE
 # This is the general area that you'd like to parse and scrape.
@@ -35,7 +43,7 @@ from bs4 import BeautifulSoup
 
 AREA_TO_SCRAPE = "ahonnecke"
 NUMBER_OF_PAGES = 1
-DESTINATION = "/media/ahonnecke/data/new/"
+DESTINATION = "/dest"
 
 # DO NOT MODIFY THESE UNLES YOU KNOW WHAT YOU ARE DOING
 DEBUG = False
@@ -130,10 +138,10 @@ class HypeScraper:
             try:
                 filename = "{} - {}.mp3".format(artist, title)
                 if os.path.exists(DESTINATION + "/" + filename):
-                    print ("File already exists, skipping")
+                    print ("    File already exists, skipping")
                     continue
                 else:
-                    print ("File does not exist, fetching")
+                    print ("    File does not exist, fetching")
 
                 serve_url = "http://hypem.com/serve/source/{}/{}".format(id, key)
                 request = urllib2.Request(
@@ -150,16 +158,18 @@ class HypeScraper:
 
                 download_response = urllib2.urlopen(url)
                 if os.path.exists(filename):
-                    print ("File already exists , skipping")
+                    print ("    File already exists , skipping")
                 else:
                     mp3_song_file = open(DESTINATION + "/" + filename, "wb")
                     mp3_song_file.write(download_response.read())
                     mp3_song_file.close()
+                    print ("    Wrote {mp3_song_file}")
             except urllib2.HTTPError, e:
                 print ("HTTPError = " + str(e.code) + " trying hypem download url.")
             except urllib2.URLError, e:
                 print ("URLError = " + str(e.reason) + " trying hypem download url.")
             except Exception, e:
+                logger.exception(e)
                 print "generic exception: " + str(e)
 
 
