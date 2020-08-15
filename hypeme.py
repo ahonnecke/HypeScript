@@ -42,7 +42,7 @@ logger.setLevel(logging.DEBUG)
 # Ex. 'popular', 'latest', '<username>' or 'track/<id>'
 
 AREA_TO_SCRAPE = "ahonnecke"
-NUMBER_OF_PAGES = 1
+NUMBER_OF_PAGES = 10
 DESTINATION = "/dest"
 
 # DO NOT MODIFY THESE UNLES YOU KNOW WHAT YOU ARE DOING
@@ -163,7 +163,7 @@ class HypeScraper:
                     mp3_song_file = open(DESTINATION + "/" + filename, "wb")
                     mp3_song_file.write(download_response.read())
                     mp3_song_file.close()
-                    print ("    Wrote {mp3_song_file}")
+                    print ("    Wrote " + filename)
             except urllib2.HTTPError, e:
                 print ("HTTPError = " + str(e.code) + " trying hypem download url.")
             except urllib2.URLError, e:
