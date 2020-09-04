@@ -42,11 +42,13 @@ logger.setLevel(logging.DEBUG)
 # Ex. 'popular', 'latest', '<username>' or 'track/<id>'
 
 AREA_TO_SCRAPE = "ahonnecke"
-NUMBER_OF_PAGES = 10
+
+# Only three pages are allowed without authentication and premium
+NUMBER_OF_PAGES = 3
 DESTINATION = "/dest"
 
 # DO NOT MODIFY THESE UNLES YOU KNOW WHAT YOU ARE DOING
-DEBUG = False
+DEBUG = True
 HYPEM_URL = "https://hypem.com/{}".format(AREA_TO_SCRAPE)
 
 
@@ -102,16 +104,18 @@ class HypeScraper:
         track_list = []
         soup = BeautifulSoup(html)
         html_tracks = soup.find(id="displayList-data")
+
         if html_tracks is None:
             return track_list
         try:
-            track_list = json.loads(html_tracks.text)
+            track_list = json.loads(html_tracks.contents[0])
             if DEBUG:
                 print json.dumps(
                     track_list, sort_keys=True, indent=4, separators=(",", ": ")
                 )
             return track_list[u"tracks"]
-        except ValueError:
+        except ValueError as e:
+            print e
             print "Hypemachine contained invalid JSON."
             return track_list
 

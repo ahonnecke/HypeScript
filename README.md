@@ -22,3 +22,7 @@ how to deploy with dependencies yet
 
 
 4. Launch the script `python hypeme.py`
+
+# Docker usage
+
+`docker-compose run hype_machine_scraper_2`
