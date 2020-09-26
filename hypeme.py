@@ -167,7 +167,7 @@ class HypeScraper:
                     mp3_song_file = open(DESTINATION + "/" + filename, "wb")
                     mp3_song_file.write(download_response.read())
                     mp3_song_file.close()
-                    print ("    Wrote " + filename " to " + DESTINATION)
+                    print ("    Wrote " + filename + " to " + DESTINATION)
             except urllib2.HTTPError, e:
                 print ("HTTPError = " + str(e.code) + " trying hypem download url.")
             except urllib2.URLError, e:
