@@ -20,14 +20,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 """
 
 import json
+import logging
 import os
 import string
 import unicodedata
 import urllib
-import urllib2
 from time import time
-import logging
 
+import urllib2
 from bs4 import BeautifulSoup
 
 logging.basicConfig(
@@ -167,7 +167,7 @@ class HypeScraper:
                     mp3_song_file = open(DESTINATION + "/" + filename, "wb")
                     mp3_song_file.write(download_response.read())
                     mp3_song_file.close()
-                    print ("    Wrote " + filename)
+                    print ("    Wrote " + filename " to " + DESTINATION)
             except urllib2.HTTPError, e:
                 print ("HTTPError = " + str(e.code) + " trying hypem download url.")
             except urllib2.URLError, e:
